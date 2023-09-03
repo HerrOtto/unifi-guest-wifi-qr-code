@@ -17,31 +17,31 @@ The UniFI Dynamic Guest WiFi Password Changer is a PHP application designed to b
 * Install Debian 12 with Apache Webserver.
 * Enable mod_rewrite:
 ````
-# sudo a2enmod rewrite
-# systemctl restart apache2
+sudo a2enmod rewrite
+sudo systemctl restart apache2
 ````
 * Allow htaccess in /var/www/html: 
 ````
-# sudo nano /etc/apache2/sites-available/000-default.conf
+sudo nano /etc/apache2/sites-available/000-default.conf
 ````
 Add the following inside the <VirtualHost *:80> block:
 ````
-    <Directory /var/www/html>
-        Options Indexes FollowSymLinks
-        AllowOverride All
-        Require all granted
-    </Directory>
+<Directory /var/www/html>
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>
 ````
 * Clone this GIT repository to /var/www/html.
 * Remove index.html from /var/www/html.
 * Modify configuration and UniFI credentials in "_init.php".
 * Set up a scheduled task (e.g., cron job) to run the change_psk.php script at regular intervals for automatic PSK rotation:
 ````
-  # sudo crontab -e
+sudo crontab -e
 ````
 Add the following line to your crontab to change the PSK every night:
 ````
-  0 0 * * * /usr/bin/php /var/www/html/newPSK.php
+0 0 * * * /usr/bin/php /var/www/html/newPSK.php
 ````
 
 # Usage

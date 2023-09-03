@@ -15,6 +15,11 @@ The UniFI Dynamic Guest WiFi Password Changer is a PHP application designed to b
 # Installation (Debian 12)
 * Add a guest WiFi to your cloud key.
 * Install Debian 12 with Apache Webserver.
+* Install PHP and requipments:
+```bash
+sudo apt-get install php libapache2-mod-php php-imagick php-json
+sudo systemctl restart apache2
+```
 * Enable mod_rewrite:
 ```bash
 sudo a2enmod rewrite
@@ -32,6 +37,10 @@ Add the following inside the <VirtualHost *:80> block:
     Require all granted
 </Directory>
 ````
+* Install git utility:
+* ```bash
+sudo apt-get install git
+```
 * Clone this GIT repository to /var/www/html.
 * Remove index.html from /var/www/html.
 * Modify configuration and UniFI credentials in "_init.php".

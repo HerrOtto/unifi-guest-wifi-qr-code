@@ -53,4 +53,4 @@ Add the following line to your crontab to change the PSK every night:
 This application is provided as-is without any warranties. Use at your own risk. The developers are not responsible for any security breaches or other issues that may arise from the use of this application.
 
 # License
-This application is licensed under the MIT License: https://chat.openai.com/LICENSE
+This application is licensed under the [MIT License]([https://chat.openai.com/LICENSE](https://opensource.org/license/mit/)https://opensource.org/license/mit/)

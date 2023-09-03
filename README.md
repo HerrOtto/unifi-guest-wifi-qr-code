@@ -53,6 +53,9 @@ cd /var/www/html
 rm index.html
 ```
 * Modify configuration and UniFI credentials in "_init.php".
+```bash
+sudo nano /var/www/html/_init.php
+```
 * Set up a scheduled task (e.g., cron job) to run the change_psk.php script at regular intervals for automatic PSK rotation:
 ```bash
 sudo crontab -e

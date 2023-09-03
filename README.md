@@ -41,7 +41,12 @@ Add the following inside the <VirtualHost *:80> block:
 ```bash
 sudo apt-get install git
 ```
-* Clone this GIT repository to /var/www/html.
+* Clone this GIT repository to /var/www/html:
+```bash
+cd /var/www/html
+git clone https://github.com/HerrOtto/unifi-guest-wifi-qr-code.git ./
+rm -rf .git
+```
 * Remove index.html from /var/www/html.
 * Modify configuration and UniFI credentials in "_init.php".
 * Set up a scheduled task (e.g., cron job) to run the change_psk.php script at regular intervals for automatic PSK rotation:

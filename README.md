@@ -66,7 +66,6 @@ Add the following line to your crontab to change the PSK every night:
 ````
 
 # Usage
-* Access the web interface using a web browser.
 * Configure the PSK rotation interval according to your security needs by changing crontab.
 * Add "http://debian-webserver-ip/" to your tablet's start page using a kiosk browser.
 

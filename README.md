@@ -47,7 +47,11 @@ cd /var/www/html
 git clone https://github.com/HerrOtto/unifi-guest-wifi-qr-code.git ./
 rm -rf .git
 ```
-* Remove index.html from /var/www/html.
+* Remove the default index.html from /var/www/html.
+```bash
+cd /var/www/html
+rm index.html
+```
 * Modify configuration and UniFI credentials in "_init.php".
 * Set up a scheduled task (e.g., cron job) to run the change_psk.php script at regular intervals for automatic PSK rotation:
 ```bash

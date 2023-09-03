@@ -38,7 +38,7 @@ Add the following inside the <VirtualHost *:80> block:
 </Directory>
 ````
 * Install git utility:
-* ```bash
+```bash
 sudo apt-get install git
 ```
 * Clone this GIT repository to /var/www/html.

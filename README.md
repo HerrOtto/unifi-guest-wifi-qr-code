@@ -1,4 +1,4 @@
-# Dynamic Guest WiFi Password Changer and QR Code Generator
+# UniFI Guest WiFi Password rotation and QR Code Generator
 
 The UniFI Dynamic Guest WiFi Password Changer is a PHP application designed to bolster security by regularly rotating the pre-shared key (PSK) for the guest WiFi network. Additionally, it streamlines the process for guests to connect to the WiFi network by generating a QR code containing the network's SSID and the current PSK.
 

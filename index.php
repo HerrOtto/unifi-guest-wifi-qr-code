@@ -5,6 +5,17 @@ require_once __DIR__ . '/_init.php';
 require_once __DIR__ . '/_global.php';
 require_once __DIR__ . '/_unifi.class.php';
 
+// Fetch site configuration
+$configCurrent = false;
+$site = isset($_GET['site']) ? $_GET['site'] : false;
+foreach ($config as $configSiteName => $configSite) {
+    if (($site === false) || ($site == $configSiteName)) {
+        $site = $configSiteName;
+        $configCurrent = $configSite;
+    }
+    break;
+}
+
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +34,7 @@ require_once __DIR__ . '/_unifi.class.php';
         /* Apply default font and font size */
         * {
             font-family: 'Roboto', sans-serif;
-            font-size: 20pt;
+            font-size: 50px;
         }
 
         /* Center content both horizontally and vertically */
@@ -50,7 +61,7 @@ require_once __DIR__ . '/_unifi.class.php';
 
         /* Styling for the Polaroid container */
         .polaroid {
-            width: 200px;
+            width: 600px;
             background-color: black;
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
@@ -60,8 +71,8 @@ require_once __DIR__ . '/_unifi.class.php';
 
         /* Styling for the inner content of the Polaroid */
         .polaroid-inner {
-            width: 200px;
-            height: 200px;
+            width: 600px;
+            height: 600px;
             background-color: white;
         }
 
@@ -73,12 +84,13 @@ require_once __DIR__ . '/_unifi.class.php';
 
         /* Styling for the subtitle container */
         .subtitle {
-            width: 200px;
+            width: 600px;
             background-color: black;
             color: white;
             padding: 10px;
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;
+            margin-bottom:40px;
         }
 
         /* Apply special font and rotation to the subtitle text */
@@ -93,7 +105,7 @@ require_once __DIR__ . '/_unifi.class.php';
             border-radius: 10px;
             background-color:white;
             color: black;
-            padding:10px;
+            padding:30px;
         }
 
         /* Exception */
@@ -111,7 +123,7 @@ require_once __DIR__ . '/_unifi.class.php';
             bottom:10px;
             right:10px;
             color: white;
-            font-size:10pt;
+            font-size:20px;
         }
     </style>
     <!-- Set page refresh interval to 1 hour -->
@@ -139,6 +151,11 @@ require_once __DIR__ . '/_unifi.class.php';
     <?php
 
     try {
+
+        // No configuration for site found
+        if ($configCurrent === false) {
+            throw new Exception('Unknown site');
+        }
 
         // Cached WiFi-Settings
         try {
@@ -173,9 +190,9 @@ require_once __DIR__ . '/_unifi.class.php';
 
             // Anmelden
             $res = $unifi->login(
-                $config['ip'],
-                $config['user'],
-                $config['pass']
+                $configCurrent['ip'],
+                $configCurrent['user'],
+                $configCurrent['pass']
             );
             if ($res === false) {
                 throw new Exception('Auth failed');
@@ -185,14 +202,14 @@ require_once __DIR__ . '/_unifi.class.php';
             $wifis = $unifi->get(
                 '/proxy/network/v2/api/site/default/wlan/enriched-configuration'
             );
-            if (count($config) < 1) {
+            if (count($configCurrent) < 1) {
                 throw new Exception('No configuration found');
             }
 
             // Find and update WiFi configuration
             $wifiConfig = '';
             foreach ($wifis as $wifisI => $wifisData) {
-                if (strpos($wifisData['configuration']['name'], $config['wifi-prefix']) !== 0) {
+                if (strpos($wifisData['configuration']['name'], $configCurrent['wifi-prefix']) !== 0) {
                     continue;
                 }
 
